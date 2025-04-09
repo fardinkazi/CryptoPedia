@@ -1,21 +1,39 @@
-import React from 'react'
+import React from 'react';
 
-import './Coins.css'
+const CoinItem = ({ coins, index, searchTerm, darkMode }) => {
+    const highlightMatch = (text, term) => {
+        if (!term) return text;
+        const regex = new RegExp(`(${term})`, 'gi');
+        return text.replace(regex, '<mark>$1</mark>');
+    };
 
-const CoinItem = (props) => {
     return (
-        <div className='coin-row'>
-            <p>{props.coins.market_cap_rank}</p>
+        <div className={`coin-row ${darkMode ? 'dark' : 'light'}`}>
+            <p>{index}</p> {/* Serial Number */}
             <div className='img-symbol'>
-                <img src={props.coins.image} alt='' />
-                <p>{props.coins.symbol.toUpperCase()}</p>
+                <img src={coins.image} alt={coins.name} />
+                <p
+                    dangerouslySetInnerHTML={{
+                        __html: highlightMatch(
+                            coins.symbol.toUpperCase(),
+                            searchTerm.toUpperCase()
+                        ),
+                    }}
+                    style={{ color: darkMode ? '#f5f5f5' : '#000' }}
+                />
             </div>
-            <p>${props.coins.current_price.toLocaleString()}</p>
-            <p>{props.coins.price_change_percentage_24h.toFixed(2)}%</p>
-            <p className='hide-mobile'>${props.coins.total_volume.toLocaleString()}</p>
-            <p className='hide-mobile'>${props.coins.market_cap.toLocaleString()}</p>
+            <p style={{ color: darkMode ? '#f5f5f5' : '#000' }}>${coins.current_price.toLocaleString()}</p>
+            <p style={{ color: darkMode ? '#f5f5f5' : '#000' }}>
+                {coins.price_change_percentage_24h.toFixed(2)}%
+            </p>
+            <p className='hide-mobile' style={{ color: darkMode ? '#f5f5f5' : '#000' }}>
+                ${coins.total_volume.toLocaleString()}
+            </p>
+            <p className='hide-mobile' style={{ color: darkMode ? '#f5f5f5' : '#000' }}>
+                ${coins.market_cap.toLocaleString()}
+            </p>
         </div>
-    )
-}
+    );
+};
 
-export default CoinItem
+export default CoinItem;

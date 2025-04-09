@@ -1,11 +1,9 @@
 .container {
     max-width: 1140px;
     margin: auto;
-    
 }
 
 .heading {
-    color: black;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -14,6 +12,8 @@
     margin: 2rem 1rem;
     padding: .7rem 1rem;
     font-weight: 700;
+    color: #000; /* Default color for light mode */
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .coin-name {
@@ -24,17 +24,37 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #170136;
-    box-shadow: 0px 0px 15px #f6f7f8;
     border-radius: 8px;
     margin: 2rem 1rem;
     padding: .7rem 1rem;
+    transition: all 0.3s ease-in-out;
+    color: #f5f5f5; /* Set text color to white for both modes */
 }
 
+/* Light Mode Styles */
+.coin-row.light {
+    background-color: #ffffff;
+    color: #f5f5f5; /* White text for light mode */
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark Mode Styles */
+.coin-row.dark {
+    background-color: #170136;
+    color: #f5f5f5; /* White text for dark mode */
+    box-shadow: 0px 0px 15px #f6f7f8;
+}
+
+/* Hover Effect */
 .coin-row:hover {
     transform: scale(1.1);
     transition: .3s ease-in-out;
     cursor: pointer;
+}
+
+/* Adjust color for the text inside coin-row for both modes */
+.coin-row .img-symbol p {
+    color: inherit; /* Inherit white text color */
 }
 
 img {
@@ -44,15 +64,55 @@ img {
 }
 
 .img-symbol {
-    
     display: flex;
     align-items: center;
 }
 
-
-
+/* Responsive Design */
 @media screen and (max-width: 720px) {
     .hide-mobile {
         display: none;
     }
+}
+
+/* Search Input Styles */
+.search-input {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light Mode Heading */
+.heading.light {
+    background-color: #f0f0f0;
+    color: #121212;
+}
+
+/* Dark Mode Heading */
+.heading.dark {
+    background-color: #1e1e1e;
+    color: #f5f5f5;
+}
+
+/* Search Container Styles */
+.search-container {
+    padding: 10px;
+}
+
+/* Light Mode Search Input */
+.search-container.light input {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #ccc;
+}
+
+/* Dark Mode Search Input */
+.search-container.dark input {
+    background-color: #2e2e2e;
+    color: #fff;
+    border: 1px solid #555;
 }
